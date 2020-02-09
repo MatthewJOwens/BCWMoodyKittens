@@ -15,7 +15,7 @@ let kittens = [];
 function addKitten(event) {
   event.preventDefault();
   const newKittenName = event.target.name.value;
-  const newKittenImg = "https://robohash.org/" + newKittenName + "?set=set4";
+  const newKittenImg = "https://www.robohash.org/set_set4/" + newKittenName + "?size=150x150";
   const newKittenId = generateId();
   const newKittenAffection = 5;
   const newKittenMood = "tolerant";
@@ -60,6 +60,20 @@ function drawKittens() {
   loadKittens();
   let template = '';
   const kittenListElement = document.getElementById('kittens')
+
+  kittens.forEach((kitten) => {
+    template += `
+      <div class="card bg-dark text-light mt-1" >
+      <div class="kitten tolerant" > <img src="${kitten.img}">
+          </div>
+        <p class=""><strong>Name: </strong>${kitten.name}</p>
+        <p><strong>Mood: </strong> ${kitten.mood}</p>
+        <p><strong>Affection: </strong>${kitten.affection}</p>
+        <div class="d-flex space-around"><button class="btn-cancel" onclick="pet(${kitten.id})">Pet</button><button
+          onclick="catnip(${kitten.id})">Catnip</button></div>
+        </div >
+    `
+  })
 }
 
 /**
