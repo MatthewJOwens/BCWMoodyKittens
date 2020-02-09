@@ -74,6 +74,7 @@ function drawKittens() {
         </div >
     `
   })
+  kittenListElement.innerHTML = template;
 }
 
 /**
