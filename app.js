@@ -12,25 +12,55 @@ let kittens = [];
  * then add that data to the kittens list.
  * Then reset the form
  */
-function addKitten(event) {}
+function addKitten(event) {
+  event.preventDefault();
+  const newKittenName = event.target.name.value;
+  const newKittenImg = "https://robohash.org/" + newKittenName + "?set=set4";
+  const newKittenId = generateId();
+  const newKittenAffection = 5;
+  const newKittenMood = "tolerant";
+  const newKitten = {
+    id: newKittenId,
+    name: newKittenName,
+    img: newKittenImg,
+    mood: newKittenMood,
+    affection: newKittenAffection,
+  };
+  console.log(newKitten);
+  kittens.push(newKitten);
+  saveKittens();
+  event.target.reset();
+}
 
 /**
  * Converts the kittens array to a JSON string then
  * Saves the string to localstorage at the key kittens
  */
-function saveKittens() {}
+function saveKittens() {
+  window.localStorage.setItem('kittens', JSON.stringify(kittens));
+  drawKittens();
+}
 
 /**
  * Attempts to retrieve the kittens string from localstorage
  * then parses the JSON string into an array. Finally sets
  * the kittens array to the retrieved array
  */
-function loadKittens() {}
+function loadKittens() {
+  const kittensData = JSON.parse(window.localStorage.getItem('kittens'));
+  if (kittensData) {
+    kittens = kittensData;
+  }
+}
 
 /**
  * Draw all of the kittens to the kittens element
  */
-function drawKittens() {}
+function drawKittens() {
+  loadKittens();
+  let template = '';
+  const kittenListElement = document.getElementById('kittens')
+}
 
 /**
  * Find the kitten in the array by its id
@@ -50,7 +80,9 @@ function findKittenById(id) {
  * save the kittens
  * @param {string} id
  */
-function pet(id) {}
+function pet(id) {
+
+}
 
 /**
  * Find the kitten in the array of kittens
@@ -59,14 +91,18 @@ function pet(id) {}
  * save the kittens
  * @param {string} id
  */
-function catnip(id) {}
+function catnip(id) {
+
+}
 
 /**
  * Sets the kittens mood based on its affection
  * Happy > 6, Tolerant <= 5, Angry <= 3, Gone <= 0
  * @param {Kitten} kitten
  */
-function setKittenMood(kitten) {}
+function setKittenMood(kitten) {
+
+}
 
 function getStarted() {
   document.getElementById("welcome").remove();
