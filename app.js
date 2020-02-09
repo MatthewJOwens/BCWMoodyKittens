@@ -18,7 +18,7 @@ function addKitten(event) {
   const newKittenImg = "https://www.robohash.org/set_set4/" + newKittenName + "?size=150x150";
   const newKittenId = generateId();
   const newKittenAffection = 5;
-  const newKittenMood = "tolerant";
+  const newKittenMood = "Tolerant";
   const newKitten = {
     id: newKittenId,
     name: newKittenName,
@@ -63,15 +63,18 @@ function drawKittens() {
 
   kittens.forEach((kitten) => {
     template += `
-      <div class="card bg-dark text-light mt-1" >
-      <div class="kitten tolerant" > <img src="${kitten.img}">
-          </div>
-        <p class=""><strong>Name: </strong>${kitten.name}</p>
+      <div class="card bg-dark text-light m-1">
+        <div class="kitten tolerant">
+          <img src="${kitten.img}">
+        </div>
+        <p><strong>Name: </strong>${kitten.name}</p>
         <p><strong>Mood: </strong> ${kitten.mood}</p>
         <p><strong>Affection: </strong>${kitten.affection}</p>
-        <div class="d-flex space-around"><button class="btn-cancel" onclick="pet(${kitten.id})">Pet</button><button
-          onclick="catnip(${kitten.id})">Catnip</button></div>
-        </div >
+        <div class="d-flex space-around">
+        <button class="btn-cancel" onclick="pet(${kitten.id})">Pet</button>
+        <button onclick="catnip(${kitten.id})">Catnip</button>
+        </div>
+      </div >
     `
   })
   kittenListElement.innerHTML = template;
