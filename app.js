@@ -74,6 +74,7 @@ function drawKittens() {
         <button class="btn-cancel" onclick="pet(${kitten.id})">Pet</button>
         <button onclick="catnip(${kitten.id})">Catnip</button>
         </div>
+        <div>ID = ${kitten.id}</div>
       </div >
     `
   })
