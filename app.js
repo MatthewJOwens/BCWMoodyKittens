@@ -99,7 +99,17 @@ function findKittenById(id) {
  * @param {string} id
  */
 function pet(id) {
-
+  console.log(id);
+  let p = findKittenById(id);
+  console.log("Found " + p);
+  let n = Math.random();
+  console.log(n);
+  if (n > .7) {
+    p.affection += 1;
+  } else {
+    p.affection -= 1;
+  }
+  saveKittens();
 }
 
 /**
@@ -110,7 +120,9 @@ function pet(id) {
  * @param {string} id
  */
 function catnip(id) {
-
+  let p = findKittenById(id);
+  p.affection = 5;
+  saveKittens();
 }
 
 /**
