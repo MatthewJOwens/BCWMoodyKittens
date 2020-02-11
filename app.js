@@ -71,10 +71,9 @@ function drawKittens() {
         <p><strong>Mood: </strong> ${kitten.mood}</p>
         <p><strong>Affection: </strong>${kitten.affection}</p>
         <div class="d-flex space-around">
-        <button class="btn-cancel" onclick="pet(${kitten.id})">Pet</button>
-        <button onclick="catnip(${kitten.id})">Catnip</button>
+        <button class="btn-cancel" onclick="pet('${kitten.id}')">Pet</button>
+        <button onclick="catnip('${kitten.id}')">Catnip</button>
         </div>
-        <div>ID = ${kitten.id}</div>
       </div >
     `
   })
@@ -100,11 +99,8 @@ function findKittenById(id) {
  * @param {string} id
  */
 function pet(id) {
-  console.log(id);
   let p = findKittenById(id);
-  console.log("Found " + p);
   let n = Math.random();
-  console.log(n);
   if (n > .7) {
     p.affection += 1;
   } else {
@@ -142,7 +138,7 @@ function getStarted() {
 
 /**
  * Defines the Properties of a Kitten
- * @typedef {{id: string, name: string, mood: string, affection: number}} Kitten
+ * @typedef {{id: string, img: string, name: string, mood: string, affection: number}} Kitten
  */
 
 /**
