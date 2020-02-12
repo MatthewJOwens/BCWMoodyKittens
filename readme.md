@@ -48,3 +48,4 @@ TODO
 change text and remove buttons when "gone"
 update not reload whole array
 Clear Kittens button > Clear X Kittens
+figure out why image sometimes doesn't load
