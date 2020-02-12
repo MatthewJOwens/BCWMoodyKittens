@@ -15,10 +15,12 @@ let kittens = [];
 function addKitten(event) {
   event.preventDefault();
   const newKittenName = event.target.name.value;
+  const duplicate = kittens.findIndex((kitten) => kitten.name === newKittenName)
   const newKittenImg = "https://www.robohash.org/set_set4/" + newKittenName + "?size=150x150";
   const newKittenId = generateId();
   const newKittenAffection = 5;
-  const newKittenMood = "Tolerant";
+  const newKittenMood = "tolerant";
+
   const newKitten = {
     id: newKittenId,
     name: newKittenName,
@@ -26,9 +28,13 @@ function addKitten(event) {
     mood: newKittenMood,
     affection: newKittenAffection,
   };
-  console.log(newKitten);
-  kittens.push(newKitten);
-  saveKittens();
+
+  if (duplicate > -1) {
+    alert("That name is already in use.");
+  } else {
+    kittens.push(newKitten);
+    saveKittens();
+  }
   event.target.reset();
 }
 
@@ -64,15 +70,15 @@ function drawKittens() {
   kittens.forEach((kitten) => {
     template += `
       <div class="card bg-dark text-light m-1">
-        <div class="kitten tolerant">
+        <div class="kitten ${kitten.mood}">
           <img src="${kitten.img}">
-        </div>
-        <p><strong>Name: </strong>${kitten.name}</p>
-        <p><strong>Mood: </strong> ${kitten.mood}</p>
-        <p><strong>Affection: </strong>${kitten.affection}</p>
-        <div class="d-flex space-around">
-        <button class="btn-cancel" onclick="pet('${kitten.id}')">Pet</button>
-        <button onclick="catnip('${kitten.id}')">Catnip</button>
+          <p><strong>Name: </strong>${kitten.name}</p>
+          <p><strong>Mood: </strong> ${kitten.mood}</p>
+          <p><strong>Affection: </strong>${kitten.affection}</p>
+          <div class="d-flex space-around">
+            <button class="btn-cancel" onclick="pet('${kitten.id}')">Pet</button>
+            <button onclick="catnip('${kitten.id}')">Catnip</button>
+          </div>
         </div>
       </div >
     `
@@ -106,6 +112,7 @@ function pet(id) {
   } else {
     p.affection -= 1;
   }
+  setKittenMood(p);
   saveKittens();
 }
 
@@ -119,6 +126,7 @@ function pet(id) {
 function catnip(id) {
   let p = findKittenById(id);
   p.affection = 5;
+  p.mood = "Tolerant"
   saveKittens();
 }
 
@@ -128,7 +136,16 @@ function catnip(id) {
  * @param {Kitten} kitten
  */
 function setKittenMood(kitten) {
-
+  let a = kitten.affection;
+  if (a >= 6) {
+    kitten.mood = "happy";
+  } else if (a >= 4) {
+    kitten.mood = "tolerant";
+  } else if (a >= 1) {
+    kitten.mood = "angry";
+  } else if (a <= 0) {
+    kitten.mood = "gone"
+  }
 }
 
 function getStarted() {
@@ -138,8 +155,13 @@ function getStarted() {
 
 /**
  * Defines the Properties of a Kitten
- * @typedef {{id: string, img: string, name: string, mood: string, affection: number}} Kitten
+ * @typedef {{id: string, name: string, img: string, mood: string, affection: number}} Kitten
  */
+
+function resetKittens() {
+  kittens = [];
+  saveKittens();
+}
 
 /**
  * Used to generate a random string id for mocked
