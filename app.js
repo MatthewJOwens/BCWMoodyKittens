@@ -68,9 +68,20 @@ function drawKittens() {
   const kittenListElement = document.getElementById('kittens')
 
   kittens.forEach((kitten) => {
-    template += `
+    if (kitten.affection < 1) {
+      template += `
       <div class="card bg-dark text-light m-1">
         <div class="kitten ${kitten.mood}">
+          <img src="${kitten.img}">
+          <p><strong>Name: </strong>${kitten.name}</p>
+          <p><strong>Ran Away</strong></p>
+        </div>
+      </div>
+    `
+    } else {
+      template += `
+        <div class="card bg-dark text-light m-1">
+          <div class="kitten ${kitten.mood}">
           <img src="${kitten.img}">
           <p><strong>Name: </strong>${kitten.name}</p>
           <p><strong>Mood: </strong> ${kitten.mood}</p>
@@ -80,8 +91,9 @@ function drawKittens() {
             <button onclick="catnip('${kitten.id}')">Catnip</button>
           </div>
         </div>
-      </div >
-    `
+      </div>
+      `
+    }
   })
   kittenListElement.innerHTML = template;
 }
@@ -175,3 +187,10 @@ function generateId() {
     Math.floor(Math.random() * 10000000)
   );
 }
+
+function resetButton() {
+  document.getElementById("reset-btn").textContent = "Reset " + kittens.length + " Kittens"
+}
+
+loadKittens();
+resetButton();

@@ -42,10 +42,3 @@ The basic design and layout for this app has been mocked out and the names of th
 1. Handle Page Refresh
   - Load the kittens list
   - Draw the kittens list
-
-TODO 
--error message when adding pre-existing name
-change text and remove buttons when "gone"
-update not reload whole array
-Clear Kittens button > Clear X Kittens
-figure out why image sometimes doesn't load
